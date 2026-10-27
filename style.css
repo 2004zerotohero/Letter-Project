@@ -282,8 +282,6 @@ button:focus-visible,
   background: linear-gradient(145deg, #f5d4d9, #e7a9b8);
 }
 
-/* Bao thư phía trước */
-
 .envelope-front-left,
 .envelope-front-right,
 .envelope-front-bottom {
@@ -315,8 +313,6 @@ button:focus-visible,
   clip-path: polygon(0 100%, 50% 42%, 100% 100%);
   border-radius: 0 0 12px 12px;
 }
-
-/* Nắp phong thư */
 
 .envelope-flap {
   position: absolute;
@@ -370,7 +366,7 @@ button:focus-visible,
 }
 
 /* =========================================
-   6. PAPER
+   6. PAPER & TYPOGRAPHY FIXES
 ========================================= */
 
 .letter-paper {
@@ -382,6 +378,7 @@ button:focus-visible,
   height: 85%;
   overflow-x: hidden;
   overflow-y: auto;
+  scrollbar-width: none; /* Ẩn trên Firefox */
   border: 1px solid rgba(218, 184, 174, 0.6);
   border-radius: 4px;
   background:
@@ -395,13 +392,16 @@ button:focus-visible,
   box-shadow: 0 8px 25px rgba(105, 65, 68, 0.08);
   opacity: 0;
   pointer-events: none;
-  scrollbar-width: thin;
-  scrollbar-color: #e6bbc5 transparent;
   transition:
     top 0.85s cubic-bezier(0.2, 0.75, 0.25, 1),
     height 0.85s cubic-bezier(0.2, 0.75, 0.25, 1),
     opacity 0.45s ease,
     box-shadow 0.5s ease;
+}
+
+/* Ẩn thanh cuộn trên Chrome, Safari, Edge */
+.letter-paper::-webkit-scrollbar {
+  display: none;
 }
 
 .paper-content {
@@ -414,6 +414,7 @@ button:focus-visible,
 .letter-date {
   margin: 0 0 18px;
   color: var(--pink-dark);
+  font-family: var(--sans);
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.25em;
@@ -433,35 +434,52 @@ button:focus-visible,
 .letter-greeting {
   margin: 0 0 15px;
   color: #8c5d6d;
-  font-family: var(--serif);
-  font-size: 18px;
-  font-style: italic;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.letter-message {
+  font-family: var(--sans);
+  text-align: justify;
 }
 
 .letter-message p {
   margin: 0 0 16px;
   color: #715c62;
+  font-family: var(--sans);
   font-size: 13px;
   line-height: 1.95;
   overflow-wrap: anywhere;
-  white-space: pre-wrap;
+  white-space: normal;
+  text-align: justify;
+}
+
+/* KHU VỰC KÝ TÊN ĐÃ ĐƯỢC CHUYỂN SANG PHẢI VÀ ĐỒNG NHẤT FONT */
+.signature-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 30px;
+  text-align: right;
+  width: 100%;
 }
 
 .letter-signoff {
-  margin: 25px 0 5px;
+  margin: 0 0 4px;
   color: #8c6874;
-  font-family: var(--serif);
-  font-size: 15px;
-  font-style: italic;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .letter-signature {
   margin: 0;
   color: #b45e7a;
   font-family: var(--serif);
-  font-size: 25px;
+  font-size: 22px;
   font-style: italic;
-  text-align: right;
+  font-weight: 600;
 }
 
 /* =========================================
@@ -1100,7 +1118,7 @@ button:focus-visible,
   }
 
   .letter-greeting {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .letter-message p {
