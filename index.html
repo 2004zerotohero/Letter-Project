@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fff4f7" />
+    <meta
+      name="description"
+      content="Một lá thư sinh nhật nhỏ dành riêng cho người anh yêu."
+    />
+    <title>Một lá thư dành cho em 💌</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <audio id="bgMusic" src="nhac-cua-ban.mp3" loop preload="auto"></audio>
+
+    <button
+      class="music-toggle"
+      id="musicToggle"
+      type="button"
+      aria-pressed="false"
+      aria-label="Bật/Tắt nhạc nền"
+    >
+      <span class="music-icon" aria-hidden="true">♫</span>
+      <span id="musicLabel">Bật nhạc</span>
+    </button>
+
+    <!-- TRANG LÁ THƯ -->
+    <main class="scene" id="scene">
+      <p class="eyebrow" id="eyebrow">A LITTLE SOMETHING FOR YOU</p>
+
+      <h1 id="headline">Gửi Thanh Xuân, ngày em đẹp nhất…</h1>
+
+      <button
+        class="letter-stage"
+        id="letterToggle"
+        type="button"
+        aria-label="Mở lá thư"
+        aria-expanded="false"
+      >
+        <span class="sparkle sparkle-one" aria-hidden="true">✦</span>
+        <span class="sparkle sparkle-two" aria-hidden="true">✧</span>
+
+        <div class="envelope" id="envelope">
+          <div class="envelope-back"></div>
+
+          <article
+            class="letter-paper"
+            id="letterPaper"
+            aria-label="Nội dung thư"
+            aria-hidden="true"
+          >
+            <div class="paper-content">
+              <p class="letter-date">A SPECIAL DAY ♡</p>
+
+              <h2>Chúc mừng sinh nhậtttt Thanh Xuân!</h2>
+
+              <p class="letter-greeting">Tâm sự 1 chút nhé bae,</p>
+
+              <div class="letter-message" id="letterMessage">
+                <p>
+                  Hôm nay là ngày của em, tất cả mọi người đều dõi theo em, anh
+                  cũng vậy cũng có chung một nhịp tim, cùng một hơi thở. Tuy
+                  rằng anh không thể đón sinh nhật của em được vì em đang phải
+                  bận rộn với kì thi phía trước nhưng đừng lo, khi nào em hoàn
+                  thành kì thi thì anh sẽ bù lại nhé!!!
+                </p>
+
+                <p>
+                  Thật sự để mà nói cảm xúc của anh ngay bây giờ không thể nào
+                  diễn tả được bằng lời, tuy rằng anh không ở đây nhưng trong
+                  tim anh vô cùng hồi hộp vì sẽ không biết em sẽ cảm thấy như
+                  thế nào khi đọc được những dòng tâm sự này.
+                </p>
+
+                <p>
+                  Anh chỉ mong rằng đoạn đường phía trước của em sẽ có thật
+                  nhiều thật nhiều những niềm vui, hạnh phúc, những nụ cười và
+                  những điều tuyệt vời nhất. Người ta hay nói tuổi 18 là độ tuổi
+                  đẹp nhất của đời người, và anh thật vinh dự khi là người được
+                  đồng hành cùng em ở ngay thời khắc ấy. Vậy nên là em hãy cứ
+                  vui vẻ, hạnh phúc và sống hết mình với tuổi thanh xuân này
+                  nhé.
+                </p>
+
+                <p>
+                  Và cuối cùng anh chỉ muốn nói rằng: Chúc mừng sinh nhật
+                  emmmmmm, bây giờ hãy tận hưởng những bất ngờ tiếp theo nhé ♡
+                </p>
+              </div>
+
+              <p class="letter-signoff">Kí tên,</p>
+              <p class="letter-signature" id="signature">Hùnggg ♡</p>
+
+              <!-- LỜI MỜI XUẤT HIỆN SAU KHI ĐÁNH MÁY XONG -->
+              <div class="letter-next" id="letterNext" hidden>
+                <p class="letter-next-message">
+                  Nhưng em à… câu chuyện của chúng mình vẫn còn tiếp tục ♡
+                </p>
+
+                <span
+                  class="letter-next-link"
+                  id="openMilestones"
+                  role="button"
+                  tabindex="0"
+                  aria-label="Khám phá những cột mốc tình yêu"
+                >
+                  <span class="next-star" aria-hidden="true">✧</span>
+                  Khám phá điều tiếp theo
+                  <span class="next-arrow" aria-hidden="true">→</span>
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <div class="envelope-front-left"></div>
+          <div class="envelope-front-right"></div>
+          <div class="envelope-front-bottom"></div>
+          <div class="envelope-flap" id="envelopeFlap"></div>
+
+          <div class="seal" id="seal" aria-hidden="true">
+            <span class="seal-heart">♡</span>
+            <span class="seal-text">Mở</span>
+          </div>
+        </div>
+      </button>
+
+      <p class="instruction" id="instruction">Chạm vào bất kỳ đâu để mở thư</p>
+
+      <p class="sub-instruction" id="subInstruction">
+        Một lời chúc nhỏ, chỉ dành riêng cho Xuân.
+      </p>
+
+      <div class="tiny-hearts" aria-hidden="true">
+        <span>♡</span>
+        <span>✧</span>
+        <span>♡</span>
+      </div>
+
+      <p class="music-note" id="musicNote">
+        Nhạc sẽ tự động phát hoặc bấm nút góc trên để bật ♫
+      </p>
+    </main>
+
+    <!-- TRANG CỘT MỐC KỶ NIỆM -->
+    <section class="milestone-view" id="milestoneView" hidden>
+      <div class="milestone-container">
+        <p class="milestone-eyebrow">OUR STORY, OUR LITTLE UNIVERSE</p>
+
+        <h1 class="milestone-title">
+          Những mảnh ghép <span>của chúng mình</span> ♡
+        </h1>
+
+        <p class="milestone-intro">
+          Mỗi ngày bên nhau đều là một kỷ niệm đáng giữ gìn. Đây là câu chuyện
+          của chúng mình, từng chút một.
+        </p>
+
+        <div class="timeline" id="timeline">
+          <div class="timeline-line" aria-hidden="true"></div>
+
+          <!-- CỘT MỐC 01 -->
+          <details class="timeline-item" open>
+            <summary class="timeline-summary">
+              <span class="timeline-number">01</span>
+
+              <span class="timeline-heading">
+                <span class="timeline-label">THE BEGINNING</span>
+                <span class="timeline-name">Ngày câu chuyện bắt đầu</span>
+                <span class="timeline-date">Một ngày thật đặc biệt ♡</span>
+              </span>
+
+              <span class="timeline-plus" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="timeline-detail">
+              <div class="memory-photo">
+                <span>♡</span>
+                <p>Ảnh kỷ niệm đầu tiên của chúng mình</p>
+              </div>
+
+              <p class="memory-text">
+                Có những cuộc gặp gỡ ban đầu tưởng như rất bình thường, nhưng
+                sau này lại trở thành một trong những điều đáng nhớ nhất. Đây là
+                nơi anh muốn lưu lại câu chuyện đầu tiên của chúng mình.
+              </p>
+
+              <p class="memory-note">
+                “Từ khoảnh khắc ấy, câu chuyện của chúng mình bắt đầu…”
+              </p>
+            </div>
+          </details>
+
+          <!-- CỘT MỐC 02 -->
+          <details class="timeline-item">
+            <summary class="timeline-summary">
+              <span class="timeline-number">02</span>
+
+              <span class="timeline-heading">
+                <span class="timeline-label">A SWEET MEMORY</span>
+                <span class="timeline-name">Kỷ niệm đáng nhớ</span>
+                <span class="timeline-date">Một ngày mình sẽ nhớ mãi</span>
+              </span>
+
+              <span class="timeline-plus" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="timeline-detail">
+              <div class="memory-photo">
+                <span>✧</span>
+                <p>Ảnh và kỷ niệm của hai người</p>
+              </div>
+
+              <p class="memory-text">
+                Nơi lưu lại một chuyến đi, một buổi hẹn hò, hay một khoảnh khắc
+                nhỏ khiến cả hai mỉm cười.
+              </p>
+            </div>
+          </details>
+
+          <!-- CỘT MỐC 03 -->
+          <details class="timeline-item">
+            <summary class="timeline-summary">
+              <span class="timeline-number">03</span>
+
+              <span class="timeline-heading">
+                <span class="timeline-label">MORE TO COME</span>
+                <span class="timeline-name">
+                  Vẫn còn nhiều điều phía trước
+                </span>
+                <span class="timeline-date"> Chưa viết xong câu chuyện ♡ </span>
+              </span>
+
+              <span class="timeline-plus" aria-hidden="true">+</span>
+            </summary>
+
+            <div class="timeline-detail">
+              <p class="memory-text">
+                Còn rất nhiều nơi để đi, món ngon để thử, ảnh để chụp và những
+                ngày bình thường để biến thành kỷ niệm. Phần tiếp theo của câu
+                chuyện vẫn đang chờ chúng mình viết tiếp.
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <button class="milestone-back" id="backToLetter" type="button">
+          <span aria-hidden="true">←</span>
+          Trở về lá thư
+        </button>
+
+        <p class="milestone-footer">Made with love, just for you ♡</p>
+      </div>
+    </section>
+
+    <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
