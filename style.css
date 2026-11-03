@@ -378,7 +378,7 @@ button:focus-visible,
   height: 85%;
   overflow-x: hidden;
   overflow-y: auto;
-  scrollbar-width: none; /* Ẩn trên Firefox */
+  scrollbar-width: none;
   border: 1px solid rgba(218, 184, 174, 0.6);
   border-radius: 4px;
   background:
@@ -399,7 +399,6 @@ button:focus-visible,
     box-shadow 0.5s ease;
 }
 
-/* Ẩn thanh cuộn trên Chrome, Safari, Edge */
 .letter-paper::-webkit-scrollbar {
   display: none;
 }
@@ -455,7 +454,6 @@ button:focus-visible,
   text-align: justify;
 }
 
-/* KHU VỰC KÝ TÊN ĐÃ ĐƯỢC CHUYỂN SANG PHẢI VÀ ĐỒNG NHẤT FONT */
 .signature-container {
   display: flex;
   flex-direction: column;
@@ -665,14 +663,14 @@ button:focus-visible,
 }
 
 /* =========================================
-   10. MILESTONE PAGE
+   10. BOOK FLIPPER PAGE STYLING
 ========================================= */
 
 .milestone-view {
   position: relative;
   z-index: 2;
   min-height: 100svh;
-  padding: 100px 24px 60px;
+  padding: 80px 24px 60px;
   opacity: 0;
   transform: translateY(18px);
   transition:
@@ -686,12 +684,12 @@ button:focus-visible,
 }
 
 .milestone-container {
-  width: min(760px, 100%);
+  width: min(650px, 100%);
   margin: 0 auto;
 }
 
 .milestone-eyebrow {
-  margin: 0 0 17px;
+  margin: 0 0 10px;
   color: var(--pink-dark);
   font-size: 10px;
   font-weight: 700;
@@ -700,12 +698,12 @@ button:focus-visible,
 }
 
 .milestone-title {
-  margin: 0;
+  margin: 0 0 24px;
   color: #684652;
   font-family: var(--serif);
-  font-size: clamp(32px, 5vw, 48px);
+  font-size: clamp(28px, 4.5vw, 40px);
   font-weight: 500;
-  line-height: 1.28;
+  line-height: 1.25;
   letter-spacing: -0.035em;
   text-align: center;
 }
@@ -715,279 +713,318 @@ button:focus-visible,
   font-style: italic;
 }
 
-.milestone-intro {
-  max-width: 500px;
-  margin: 20px auto 46px;
-  color: #987a83;
-  font-size: 13px;
-  line-height: 1.95;
-  text-align: center;
+/* Khung quyển sách 3D */
+.book-stage {
+  position: relative;
+  width: 100%;
+  min-height: 480px;
+  perspective: 1500px;
+  margin-bottom: 24px;
 }
 
-/* =========================================
-   11. TIMELINE
-========================================= */
-
-.timeline {
+.book {
   position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  transform-style: preserve-3d;
+}
+
+/* Các trang sách */
+.book-page {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255, 253, 249, 0.98), rgba(255, 253, 249, 0.98)),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 30px,
+      rgba(210, 183, 173, 0.08) 31px
+    );
+  border: 1px solid rgba(231, 195, 204, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(141, 83, 101, 0.08);
+  padding: 32px 36px;
   display: flex;
   flex-direction: column;
-  gap: 21px;
-  padding: 0 0 12px;
-}
-
-.timeline-line {
-  position: absolute;
-  top: 25px;
-  bottom: 40px;
-  left: 27px;
-  width: 1px;
-  background: linear-gradient(
-    to bottom,
-    rgba(218, 153, 170, 0.2),
-    rgba(218, 153, 170, 0.9),
-    rgba(218, 153, 170, 0.2)
-  );
-}
-
-.timeline-item {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(231, 195, 204, 0.85);
-  border-radius: 19px;
-  background: rgba(255, 253, 250, 0.78);
-  box-shadow: 0 9px 28px rgba(141, 83, 101, 0.055);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  justify-content: space-between;
+  transform-origin: left center;
   transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
-  animation: fadeRise 0.65s ease both;
+    transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1),
+    opacity 0.5s ease;
+  backface-visibility: hidden;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
 }
 
-.timeline-item:nth-of-type(2) {
-  animation-delay: 0.1s;
+.book-page.active-page {
+  z-index: 10;
+  pointer-events: auto;
+  opacity: 1;
+  transform: rotateY(0deg);
 }
 
-.timeline-item:nth-of-type(3) {
-  animation-delay: 0.2s;
+.book-page.flipped {
+  transform: rotateY(-180deg);
+  opacity: 0;
+  pointer-events: none;
 }
 
-.timeline-item:nth-of-type(4) {
-  animation-delay: 0.3s;
-}
-
-.timeline-item:hover {
-  border-color: #dfabb9;
-  box-shadow: 0 15px 38px rgba(141, 83, 101, 0.1);
-  transform: translateY(-2px);
-}
-
-.timeline-summary {
-  position: relative;
+.page-inner {
   display: flex;
-  min-height: 108px;
-  align-items: center;
-  gap: 20px;
-  padding: 22px 25px 22px 17px;
-  list-style: none;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
-
-.timeline-summary::-webkit-details-marker {
+.page-inner::-webkit-scrollbar {
   display: none;
 }
 
-.timeline-summary::marker {
-  content: "";
+/* Trang bìa */
+.page-cover {
+  background: linear-gradient(135deg, #f9e2e6, #f3c7d1);
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
-.timeline-number {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  width: 55px;
-  min-width: 55px;
-  height: 55px;
+.cover-inner {
   align-items: center;
   justify-content: center;
-  border: 1px solid #e8bec9;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #fff7f7, #f8e1e7);
-  color: #b76b83;
+}
+
+.cover-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: #a45670;
+  margin-bottom: 15px;
+}
+
+.page-cover h2 {
   font-family: var(--serif);
-  font-size: 20px;
-  box-shadow: 0 4px 13px rgba(184, 117, 138, 0.08);
-  transition:
-    background 0.3s ease,
-    color 0.3s ease,
-    transform 0.3s ease;
+  font-size: clamp(32px, 6vw, 42px);
+  color: #6e4755;
+  margin: 0 0 15px;
+  line-height: 1.3;
 }
 
-.timeline-item[open] .timeline-number {
-  background: linear-gradient(145deg, #e9b5c2, #cb8298);
-  color: white;
-  transform: scale(1.04);
+.page-cover h2 span {
+  color: #9d3f5e;
+  font-style: italic;
 }
 
-.timeline-heading {
-  display: flex;
-  min-width: 0;
-  flex: 1;
-  flex-direction: column;
-  gap: 5px;
+.page-cover p {
+  color: #8c5d6d;
+  font-size: 13px;
+  line-height: 1.8;
+  max-width: 400px;
+  margin: 0 auto 30px;
 }
 
-.timeline-label {
-  color: #c18295;
+.book-hint-tap {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #a45670;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 10px 18px;
+  border-radius: 99px;
+  border: 1px solid #e8bec9;
+  animation: gentleFloat 2s ease-in-out infinite;
+}
+
+/* Nội dung bên trong trang */
+.page-header-number {
+  font-family: var(--serif);
+  font-size: 24px;
+  color: #b76b83;
+  margin-bottom: 4px;
+}
+
+.page-tag {
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.2em;
+  color: #c18295;
+  margin-bottom: 4px;
 }
 
-.timeline-name {
-  color: #694954;
+.book-page h3 {
   font-family: var(--serif);
-  font-size: clamp(17px, 2.6vw, 21px);
-  font-weight: 600;
-  line-height: 1.45;
+  font-size: clamp(20px, 3vw, 24px);
+  color: #694954;
+  margin: 0 0 4px;
 }
 
-.timeline-date {
-  color: #a88c94;
+.page-date {
   font-size: 11px;
-  line-height: 1.6;
+  color: #a88c94;
+  margin-bottom: 16px;
 }
 
-.timeline-plus {
-  display: flex;
-  width: 30px;
-  min-width: 30px;
-  height: 30px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #edd3da;
-  border-radius: 50%;
-  color: #b8758a;
-  font-size: 19px;
-  font-weight: 400;
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    color 0.3s ease;
-}
-
-.timeline-item[open] .timeline-plus {
-  background: #f7e2e8;
-  color: #a45570;
-  transform: rotate(45deg);
-}
-
-.timeline-detail {
-  padding: 0 26px 27px 92px;
-  animation: fadeRise 0.35s ease both;
-}
-
-.timeline-detail::before {
-  display: block;
-  height: 1px;
-  margin-bottom: 23px;
-  background: linear-gradient(to right, #f0d7de, rgba(240, 215, 222, 0.05));
-  content: "";
-}
-
-/* =========================================
-   12. MEMORY CARD / PLACEHOLDER
-========================================= */
-
+/* Ảnh minh họa trong trang sách */
 .memory-photo {
   position: relative;
   display: flex;
-  min-height: 185px;
+  min-height: 140px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   border: 1px solid rgba(235, 198, 207, 0.7);
-  border-radius: 13px;
-  background:
-    radial-gradient(
-      ellipse at 20% 20%,
-      rgba(255, 255, 255, 0.95),
-      transparent 40%
-    ),
-    radial-gradient(
-      ellipse at 85% 80%,
-      rgba(235, 188, 199, 0.45),
-      transparent 45%
-    ),
-    linear-gradient(135deg, #f9e9ec, #fff4ed);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f9e9ec, #fff4ed);
   text-align: center;
-}
-
-.memory-photo::before,
-.memory-photo::after {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  border: 1px solid rgba(214, 154, 171, 0.2);
-  border-radius: 50%;
-  content: "";
-}
-
-.memory-photo::before {
-  top: -80px;
-  right: -35px;
-}
-
-.memory-photo::after {
-  bottom: -100px;
-  left: -20px;
-  width: 190px;
-  height: 190px;
+  margin-bottom: 14px;
 }
 
 .memory-photo > span {
-  position: relative;
-  z-index: 1;
   color: #d58ca2;
   font-family: var(--serif);
-  font-size: 46px;
+  font-size: 38px;
 }
 
 .memory-photo p {
-  position: relative;
-  z-index: 1;
-  margin: 10px 15px 0;
+  margin: 6px 10px 0;
   color: #a57886;
   font-size: 11px;
-  line-height: 1.7;
 }
 
 .memory-text {
-  margin: 19px 0 0;
+  margin: 0 0 12px;
   color: #7d646d;
   font-size: 13px;
-  line-height: 1.95;
+  line-height: 1.8;
+  text-align: justify;
 }
 
 .memory-note {
-  margin: 19px 0 0;
-  padding: 15px 17px;
+  margin: 0;
+  padding: 12px 15px;
   border-left: 2px solid #dca2b2;
-  border-radius: 0 9px 9px 0;
+  border-radius: 0 8px 8px 0;
   background: #fff5f6;
   color: #a4697d;
   font-family: var(--serif);
-  font-size: 14px;
+  font-size: 13px;
   font-style: italic;
-  line-height: 1.8;
+  line-height: 1.7;
+}
+
+/* Trang cuối (Trang kết thúc & lời chúc) */
+.page-final {
+  text-align: center;
+  justify-content: center;
+}
+
+.final-inner {
+  align-items: center;
+  justify-content: center;
+}
+
+.final-heart {
+  font-family: var(--serif);
+  font-size: 38px;
+  color: #cf8198;
+  margin-bottom: 4px;
+}
+
+.page-final h3 {
+  font-size: 24px;
+  color: #754958;
+  margin-bottom: 8px;
+}
+
+.final-lead {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: #987a83;
+  margin-bottom: 18px;
+}
+
+.final-wishes-box {
+  background: #fff5f6;
+  border: 1px solid #ebd0d8;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.final-wishes-box p {
+  margin: 0;
+  color: #754958;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.final-sign {
+  font-size: 13px;
+  color: #8c6874;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.final-sign strong {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: #b45e7a;
+  font-style: italic;
+}
+
+/* Thanh điều hướng sách */
+.book-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.book-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 1px solid #e7bec9;
+  border-radius: 999px;
+  background: rgba(255, 253, 250, 0.9);
+  color: #a65f77;
+  box-shadow: 0 6px 18px rgba(155, 88, 108, 0.07);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.book-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: white;
+  box-shadow: 0 10px 22px rgba(155, 88, 108, 0.12);
+}
+
+.book-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.book-pagination {
+  font-size: 12px;
+  font-weight: 600;
+  color: #9d7d86;
+  letter-spacing: 0.05em;
 }
 
 /* =========================================
-   13. BACK BUTTON & FOOTER
+   11. BACK BUTTON & FOOTER
 ========================================= */
 
 .milestone-back {
@@ -995,8 +1032,8 @@ button:focus-visible,
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin: 35px auto 0;
-  padding: 13px 22px;
+  margin: 25px auto 0;
+  padding: 12px 20px;
   border: 1px solid #e7bec9;
   border-radius: 999px;
   background: rgba(255, 253, 250, 0.85);
@@ -1027,7 +1064,7 @@ button:focus-visible,
 }
 
 .milestone-footer {
-  margin: 36px 0 0;
+  margin: 24px 0 0;
   color: #b999a2;
   font-family: var(--serif);
   font-size: 12px;
@@ -1037,7 +1074,7 @@ button:focus-visible,
 }
 
 /* =========================================
-   14. PAGE TRANSITIONS
+   12. PAGE TRANSITIONS
 ========================================= */
 
 .scene.scene-leaving {
@@ -1158,7 +1195,7 @@ button:focus-visible,
   }
 
   .milestone-view {
-    padding: 90px 16px 45px;
+    padding: 80px 16px 35px;
   }
 
   .milestone-eyebrow {
@@ -1166,78 +1203,29 @@ button:focus-visible,
     letter-spacing: 0.2em;
   }
 
-  .milestone-title {
-    font-size: clamp(29px, 8vw, 38px);
+  .book-stage {
+    min-height: 440px;
   }
 
-  .milestone-intro {
-    margin: 16px auto 32px;
-    font-size: 12px;
+  .book {
+    min-height: 440px;
   }
 
-  .timeline {
-    gap: 15px;
+  .book-page {
+    padding: 22px 20px;
   }
 
-  .timeline-line {
-    left: 23px;
+  .book-controls {
+    gap: 10px;
   }
 
-  .timeline-summary {
-    min-height: 98px;
-    gap: 13px;
-    padding: 17px 13px;
-  }
-
-  .timeline-number {
-    width: 47px;
-    min-width: 47px;
-    height: 47px;
-    font-size: 18px;
-  }
-
-  .timeline-label {
-    font-size: 8px;
-    letter-spacing: 0.14em;
-  }
-
-  .timeline-name {
-    font-size: 16px;
-  }
-
-  .timeline-date {
-    font-size: 10px;
-  }
-
-  .timeline-plus {
-    width: 25px;
-    min-width: 25px;
-    height: 25px;
-    font-size: 16px;
-  }
-
-  .timeline-detail {
-    padding: 0 15px 20px;
-  }
-
-  .timeline-detail::before {
-    margin-bottom: 17px;
-  }
-
-  .memory-photo {
-    min-height: 150px;
-  }
-
-  .memory-text {
-    font-size: 12px;
-  }
-
-  .memory-note {
-    font-size: 13px;
+  .book-btn {
+    padding: 10px 14px;
+    font-size: 11px;
   }
 
   .milestone-back {
-    margin-top: 28px;
+    margin-top: 20px;
   }
 }
 
@@ -1280,4 +1268,600 @@ button:focus-visible,
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* =========================================
+   13. MỞ ĐẦU: CHÀO MỪNG, ĐỒNG Ý, MẬT KHẨU & GAME
+========================================= */
+
+.journey {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: 90px 20px 55px;
+}
+
+.journey-panel {
+  width: min(650px, 100%);
+  padding: clamp(28px, 5vw, 48px);
+  border: 1px solid rgba(231, 195, 204, 0.82);
+  border-radius: 26px;
+  background: rgba(255, 253, 250, 0.78);
+  box-shadow: var(--shadow);
+  text-align: center;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: fadeRise 0.65s ease both;
+}
+
+.journey-panel[hidden] {
+  display: none !important;
+}
+
+.journey-eyebrow {
+  margin: 0 0 18px;
+  color: var(--pink-dark);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+}
+
+.journey-title {
+  margin: 0 auto;
+  color: #6e4755;
+  font-family: var(--serif);
+  font-size: clamp(29px, 5vw, 43px);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+}
+
+.journey-title span {
+  color: #bd7188;
+  font-style: italic;
+}
+
+.journey-hint,
+.journey-description {
+  margin: 22px auto 0;
+  color: #987a83;
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+.journey-hint {
+  animation: gentleFloat 2.5s ease-in-out infinite;
+}
+
+kbd {
+  display: inline-block;
+  padding: 4px 9px;
+  border: 1px solid #e7bec9;
+  border-radius: 7px;
+  background: #fff6f7;
+  color: #a45670;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 0 2px 0 #e7c4cd;
+}
+
+.journey-primary,
+.journey-secondary {
+  display: inline-flex;
+  min-height: 45px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.journey-primary {
+  margin-top: 26px;
+  border: 1px solid #eac4ce;
+  background: linear-gradient(135deg, #fff6f7, #f5dce3);
+  color: #a45670;
+  box-shadow: 0 8px 20px rgba(183, 112, 133, 0.12);
+}
+
+.journey-secondary {
+  border: 1px solid #ead9dd;
+  background: rgba(255, 255, 255, 0.7);
+  color: #9d7d86;
+  transform-origin: center;
+}
+
+.journey-primary:hover,
+.journey-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(183, 112, 133, 0.16);
+}
+
+.choice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.choice-actions .journey-primary {
+  margin-top: 0;
+}
+
+.journey-feedback {
+  min-height: 22px;
+  margin: 18px 0 0;
+  color: #b45e7a;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.password-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 30px;
+  text-align: left;
+}
+
+.answer-field,
+.game-round label {
+  display: grid;
+  gap: 9px;
+  color: #795965;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+.answer-field input,
+.game-round textarea {
+  width: 100%;
+  border: 1px solid #ead2d9;
+  border-radius: 12px;
+  outline: none;
+  background: rgba(255, 250, 250, 0.9);
+  color: var(--ink);
+  font: 400 13px/1.7 var(--sans);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.answer-field input {
+  min-height: 46px;
+  padding: 11px 14px;
+}
+
+.game-round textarea {
+  min-height: 70px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+.answer-field input:focus,
+.game-round textarea:focus {
+  border-color: #d99aab;
+  box-shadow: 0 0 0 3px rgba(217, 154, 171, 0.15);
+}
+
+.answer-field input::placeholder,
+.game-round textarea::placeholder {
+  color: #b99da5;
+  font-weight: 400;
+}
+
+.password-form > .journey-primary {
+  justify-self: center;
+  margin-top: 0;
+}
+
+.game-panel {
+  width: min(820px, 100%);
+  text-align: left;
+}
+
+.game-panel > .journey-eyebrow,
+.game-panel > .journey-title,
+.game-panel > .journey-description {
+  text-align: center;
+}
+
+.game-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.game-round {
+  display: grid;
+  gap: 17px;
+  padding: 23px;
+  border: 1px solid rgba(231, 195, 204, 0.8);
+  border-radius: 18px;
+  background: rgba(255, 247, 248, 0.66);
+}
+
+.game-round h2 {
+  margin: 0;
+  color: #a45670;
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.game-round label {
+  font-weight: 500;
+}
+
+.game-submit {
+  justify-self: center;
+  min-width: 170px;
+}
+
+.unlock-overlay {
+  position: fixed;
+  z-index: 150;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(93, 57, 69, 0.2);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.unlock-overlay[hidden] {
+  display: none !important;
+}
+
+.unlock-overlay.is-visible {
+  opacity: 1;
+}
+
+.unlock-card {
+  width: min(390px, 100%);
+  padding: 35px 25px;
+  border: 1px solid #edcbd4;
+  border-radius: 22px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  text-align: center;
+  transform: translateY(12px) scale(0.98);
+  transition: transform 0.3s ease;
+}
+
+.unlock-overlay.is-visible .unlock-card {
+  transform: translateY(0) scale(1);
+}
+
+.unlock-heart {
+  color: #cf8198;
+  font-family: var(--serif);
+  font-size: 42px;
+}
+
+.unlock-card h2 {
+  margin: 8px 0 0;
+  color: #754958;
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.unlock-card .journey-primary {
+  margin-top: 22px;
+}
+
+.flying-words {
+  position: fixed;
+  z-index: 200;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: rgba(255, 247, 247, 0.94);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.flying-words[hidden] {
+  display: none !important;
+}
+
+.flying-words.is-active {
+  opacity: 1;
+}
+
+.flying-word {
+  position: absolute;
+  color: #b96f86;
+  font-family: var(--serif);
+  font-size: clamp(17px, 3vw, 29px);
+  font-style: italic;
+  white-space: nowrap;
+  opacity: 0;
+  animation: wordsFly 1.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--delay) both;
+}
+
+@keyframes wordsFly {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(0) scale(0.5);
+  }
+  18% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift-x), var(--drift-y)) rotate(var(--rotation))
+      scale(1.35);
+  }
+}
+
+.scene-entering {
+  animation: fadeRise 0.7s ease both;
+}
+
+@media (max-width: 600px) {
+  .journey {
+    padding: 82px 15px 35px;
+  }
+
+  .journey-panel {
+    padding: 28px 20px;
+    border-radius: 21px;
+  }
+
+  .journey-title {
+    font-size: clamp(27px, 8vw, 35px);
+  }
+
+  .choice-actions {
+    flex-direction: column;
+  }
+
+  .choice-actions button {
+    width: 100%;
+  }
+
+  .game-round {
+    padding: 18px 15px;
+  }
+
+  .game-round h2 {
+    font-size: 19px;
+  }
+}
+
+/* =========================================
+   MEMORY IMAGE GRID - TỰ ĐỘNG CO GIÃN
+========================================= */
+
+/* Khung lưới chứa ảnh */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 14px 0 18px;
+  align-items: stretch;
+}
+
+/* Lưới 1 ảnh */
+.memory-grid.grid-1 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Lưới 3 ảnh */
+.memory-grid.grid-3 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.memory-grid.grid-3 .memory-img-wrap:last-child {
+  grid-column: 1 / -1;
+}
+
+/* Lưới 4 ảnh */
+.memory-grid.grid-4 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Khung chứa từng ảnh */
+.memory-img-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-width: 0;
+  height: 150px;
+  padding: 5px;
+
+  overflow: hidden;
+  border: 1px solid rgba(231, 195, 204, 0.65);
+  border-radius: 12px;
+  background: #fff8f9;
+  box-shadow: 0 4px 12px rgba(155, 88, 108, 0.06);
+}
+
+/* Ảnh tự động co giãn theo khung */
+.memory-img-wrap img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+/* Khung ảnh đơn */
+.memory-grid.grid-1 .memory-img-wrap {
+  height: 240px;
+}
+
+/* Ảnh đơn hiển thị toàn bộ */
+.memory-grid.grid-1 .memory-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* =========================================
+   RESPONSIVE - ĐIỆN THOẠI
+========================================= */
+
+/* =========================================
+   FIX: MEMORY IMAGE GRID
+   Áp dụng cho cả máy tính và điện thoại
+========================================= */
+
+.book-page {
+  overflow: hidden;
+  min-width: 0;
+}
+
+.page-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.page-inner::-webkit-scrollbar {
+  display: none;
+}
+
+/* Khung lưới ảnh */
+.book-page .memory-grid {
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  flex: 0 0 auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0 18px;
+  align-items: stretch;
+}
+
+/* Lưới 1 ảnh */
+.book-page .memory-grid.grid-1 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Lưới 3 ảnh */
+.book-page .memory-grid.grid-3 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.book-page .memory-grid.grid-3 .memory-img-wrap:last-child {
+  grid-column: 1 / -1;
+}
+
+/* Lưới 4 ảnh */
+.book-page .memory-grid.grid-4 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Khung chứa từng ảnh */
+.book-page .memory-img-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 145px;
+  min-width: 0;
+  min-height: 0;
+  flex: 0 0 145px;
+  padding: 5px;
+  overflow: hidden;
+  border: 1px solid rgba(231, 195, 204, 0.65);
+  border-radius: 12px;
+  background: #fff8f9;
+  box-shadow: 0 4px 12px rgba(155, 88, 108, 0.06);
+}
+
+/* Ảnh hiển thị đầy đủ, không bị méo hoặc cắt */
+.book-page .memory-img-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+/* Ảnh đơn có khung lớn hơn */
+.book-page .memory-grid.grid-1 .memory-img-wrap {
+  height: 240px;
+  flex-basis: 240px;
+}
+
+/* =========================================
+   RESPONSIVE: ĐIỆN THOẠI
+========================================= */
+
+@media (max-width: 600px) {
+  .book-page .memory-grid {
+    gap: 8px;
+  }
+
+  .book-page .memory-img-wrap {
+    height: 115px;
+    flex-basis: 115px;
+  }
+
+  .book-page .memory-grid.grid-1 .memory-img-wrap {
+    height: 190px;
+    flex-basis: 190px;
+  }
+}
+
+/* SỬA LỖI ẢNH BỊ PHÓNG TO HOẶC CẮT */
+.memory-img-wrap {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memory-img-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+  max-width: 100%;
 }

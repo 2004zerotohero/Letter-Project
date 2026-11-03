@@ -8,7 +8,7 @@
       name="description"
       content="Một lá thư sinh nhật nhỏ dành riêng cho người anh yêu."
     />
-    <title>Một lá thư dành cho em 💌</title>
+    <title>Một lá thư dành cho Xuân 💌</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,9 +37,220 @@
       <span id="musicLabel">Bật nhạc</span>
     </button>
 
+    <!-- HÀNH TRÌNH TRƯỚC KHI MỞ QUÀ -->
+    <main class="journey" id="journey">
+      <section
+        class="journey-panel is-active"
+        id="welcomeStep"
+        aria-labelledby="welcomeTitle"
+      >
+        <p class="journey-eyebrow">Happy birthday</p>
+        <h1 class="journey-title" id="welcomeTitle">
+          Chúc mừng sinh nhật<br /><span> bé Thanh Xuân</span> ♡
+        </h1>
+        <p class="journey-hint">Nhấn nút <kbd>SPACE</kbd> để tiếp tục</p>
+        <button class="journey-primary" id="welcomeContinue" type="button">
+          Bắt đầu ♡
+        </button>
+      </section>
+
+      <section
+        class="journey-panel"
+        id="consentStep"
+        aria-labelledby="consentTitle"
+        hidden
+      >
+        <p class="journey-eyebrow">BEFORE THE SURPRISE</p>
+        <h1 class="journey-title" id="consentTitle">
+          Trước khi nhận phần quà vô vàn bất ngờ thì Xuân sẽ chơi một trò chơi
+          nho nhỏ nhé ♡
+        </h1>
+        <div class="choice-actions">
+          <button class="journey-primary" id="agreeButton" type="button">
+            Em dong tinh
+          </button>
+          <button class="journey-secondary" id="skipButton" type="button">
+            Em muốn skip vào luôn phần quà cơ
+          </button>
+        </div>
+        <p class="journey-feedback" id="skipFeedback" aria-live="polite"></p>
+      </section>
+
+      <section
+        class="journey-panel"
+        id="passwordStep"
+        aria-labelledby="passwordTitle"
+        hidden
+      >
+        <p class="journey-eyebrow">Kỉ niệm đáng nhớ</p>
+        <h1 class="journey-title" id="passwordTitle">
+          Chỉ người đặc biệt mới mở được món quà này
+        </h1>
+        <p class="journey-description">
+          Trả lời hai câu hỏi nhỏ để mở khóa nhé bé Xuân.
+        </p>
+        <form class="password-form" id="passwordForm">
+          <label class="answer-field">
+            <span>1. Ngày anh và em chính thức quen nhau là ngày nào nhỉ?</span>
+            <input
+              id="answerDate"
+              name="answerDate"
+              type="text"
+              placeholder="Câu trả lời của em..."
+              autocomplete="off"
+              required
+            />
+          </label>
+          <label class="answer-field">
+            <span>2. Nơi mà chúng ta gặp nhau đầu tiên là ở đâu nè?</span>
+            <input
+              id="answerPlace"
+              name="answerPlace"
+              type="text"
+              placeholder="Câu trả lời của em..."
+              autocomplete="off"
+              required
+            />
+          </label>
+          <p
+            class="journey-feedback"
+            id="passwordFeedback"
+            aria-live="polite"
+          ></p>
+          <button class="journey-primary" type="submit">Mở khóa ♡</button>
+        </form>
+      </section>
+
+      <section
+        class="journey-panel game-panel"
+        id="gameStep"
+        aria-labelledby="gameTitle"
+        hidden
+      >
+        <p class="journey-eyebrow">TÂM SỰ NHỎ</p>
+        <h1 class="journey-title" id="gameTitle">Một chút về chúng mình ♡</h1>
+        <p class="journey-description">
+          Không có đáp án đúng hay sai. Anh chỉ muốn nghe những điều Xuân nghĩ.
+        </p>
+        <form id="gameForm" class="game-form">
+          <div class="game-round">
+            <h2>♡ Vòng 1: Bật mí chút điiiii</h2>
+            <label
+              >1. Điều gì ở anh khiến em yêu nhất?<textarea
+                name="q1"
+                rows="2"
+                placeholder="Em kể anh nghe nhé..."
+              ></textarea>
+            </label>
+            <label
+              >2. Kỷ niệm nào của hai đứa đáng nhớ nhất?<textarea
+                name="q2"
+                rows="2"
+                placeholder="Em kể anh nghe nhé..."
+              ></textarea>
+            </label>
+            <label
+              >3. Nếu được đi du lịch cùng nhau, em muốn đi đâu?<textarea
+                name="q3"
+                rows="2"
+                placeholder="Em kể anh nghe nhé..."
+              ></textarea>
+            </label>
+          </div>
+          <div class="game-round">
+            <h2>🤣 Vòng 2: Ai hiểu ai hơn!!?</h2>
+            <label
+              >1. Nếu người yêu biến thành con mèo, em có nuôi không?<textarea
+                name="q4"
+                rows="2"
+                placeholder="Em kể anh nghe nhé..."
+              ></textarea>
+            </label>
+            <label
+              >2. Ai là người trẻ con hơn trong hai đứa?<textarea
+                name="q5"
+                rows="2"
+                placeholder="Em kể anh nghe nhé..."
+              ></textarea>
+            </label>
+            <label
+              >3. Nếu được đổi ngoại hình cho nhau một ngày, em sẽ làm
+              gì?<textarea
+                name="q6"
+                rows="2"
+                placeholder="Em kể anh nghe nhé..."
+              ></textarea>
+            </label>
+          </div>
+          <div class="game-round">
+            <h2>🔥 Vòng 3: Hỏi gì khó vậyyyy?</h2>
+            <label
+              >1. Nếu được ở một nơi chỉ có riêng 2 đứa mình trong vòng 1 ngày,
+              em sẽ làm gì?<textarea
+                name="q7"
+                rows="2"
+                placeholder="Em kể anh nghe nhé..."
+              ></textarea>
+            </label>
+            <label
+              >2. Đã bao giờ ghen mà giả vờ không ghen chưa?<textarea
+                name="q8"
+                rows="2"
+                placeholder="Em kể anh nghe nhé..."
+              ></textarea>
+            </label>
+            <label
+              >3. Điều gì khiến em rung động nhất khi ở gần anh?<textarea
+                name="q9"
+                rows="2"
+                placeholder="Em kể anh nghe nhé..."
+              ></textarea>
+            </label>
+          </div>
+          <div class="game-round">
+            <h2>🥺 Vòng 4: Bản lĩnh thành thật với anh??</h2>
+            <label
+              >1. Điều gì em sợ nhất trong tình yêu?<textarea
+                name="q10"
+                rows="2"
+                placeholder="Em kể anh nghe nhé..."
+              ></textarea>
+            </label>
+            <label
+              >2. Có điều gì muốn anh thay đổi không?<textarea
+                name="q11"
+                rows="2"
+                placeholder="Em kể anh nghe nhé..."
+              ></textarea>
+            </label>
+            <label
+              >3. Em mong muốn tương lai hai đứa sẽ như thế nào?<textarea
+                name="q12"
+                rows="2"
+                placeholder="Em kể anh nghe nhé..."
+              ></textarea>
+            </label>
+          </div>
+          <button class="journey-primary game-submit" type="submit">
+            Hoàn thành ♡
+          </button>
+        </form>
+      </section>
+    </main>
+    <div class="unlock-overlay" id="unlockOverlay" hidden>
+      <div class="unlock-card">
+        <span class="unlock-heart">♡</span>
+        <h2>Mở khóa thành công!</h2>
+        <button class="journey-primary" id="unlockContinue" type="button">
+          Nhấn để tiếp tục
+        </button>
+      </div>
+    </div>
+    <div class="flying-words" id="flyingWords" aria-hidden="true"></div>
+
     <!-- TRANG LÁ THƯ -->
-    <main class="scene" id="scene">
-      <p class="eyebrow" id="eyebrow">A LITTLE SOMETHING FOR YOU</p>
+    <main class="scene" id="scene" hidden>
+      <p class="eyebrow" id="eyebrow">PHẦN DÀNH RIÊNG CHO EM</p>
 
       <h1 id="headline">Gửi Thanh Xuân, ngày em đẹp nhất…</h1>
 
@@ -110,7 +321,7 @@
               <!-- LỜI MỜI XUẤT HIỆN SAU KHI ĐÁNH MÁY XONG -->
               <div class="letter-next" id="letterNext" hidden>
                 <p class="letter-next-message">
-                  Nhưng em à… câu chuyện của chúng mình vẫn còn tiếp tục ♡
+                  Nhưng bức thư này chưa dừng lại ở đây đâu bé, tiếp tục nhé ♡
                 </p>
 
                 <span
@@ -157,106 +368,178 @@
       </p>
     </main>
 
-    <!-- TRANG CỘT MỐC KỶ NIỆM -->
+    <!-- TRANG QUYỂN SÁCH KỶ NIỆM (BOOK FLIPPER) -->
     <section class="milestone-view" id="milestoneView" hidden>
       <div class="milestone-container">
-        <p class="milestone-eyebrow">OUR STORY, OUR LITTLE UNIVERSE</p>
+        <p class="milestone-eyebrow">Thanh Xuân's Birthday</p>
+        <h1 class="milestone-title">Quyển sách <span>của em</span> ♡</h1>
 
-        <h1 class="milestone-title">
-          Những mảnh ghép <span>của chúng mình</span> ♡
-        </h1>
-
-        <p class="milestone-intro">
-          Mỗi ngày bên nhau đều là một kỷ niệm đáng giữ gìn. Đây là câu chuyện
-          của chúng mình, từng chút một.
-        </p>
-
-        <div class="timeline" id="timeline">
-          <div class="timeline-line" aria-hidden="true"></div>
-
-          <!-- CỘT MỐC 01 -->
-          <details class="timeline-item" open>
-            <summary class="timeline-summary">
-              <span class="timeline-number">01</span>
-
-              <span class="timeline-heading">
-                <span class="timeline-label">THE BEGINNING</span>
-                <span class="timeline-name">Ngày câu chuyện bắt đầu</span>
-                <span class="timeline-date">Một ngày thật đặc biệt ♡</span>
-              </span>
-
-              <span class="timeline-plus" aria-hidden="true">+</span>
-            </summary>
-
-            <div class="timeline-detail">
-              <div class="memory-photo">
-                <span>♡</span>
-                <p>Ảnh kỷ niệm đầu tiên của chúng mình</p>
+        <!-- KHUNG QUYỂN SÁCH -->
+        <div class="book-stage" id="bookStage">
+          <div class="book" id="book">
+            <!-- TRANG BÌA -->
+            <div class="book-page page-cover" data-page="0">
+              <div class="page-inner cover-inner">
+                <span class="cover-badge">MEMORY BOOK</span>
+                <h2>Hành trình<br /><span>của Thanh Xuân</span></h2>
+                <p>
+                  Mỗi trang sách là một ký ức, một cột mốc nhỏ mà em đã đi
+                  qua...
+                </p>
+                <div class="book-hint-tap">
+                  Nhấn <strong>"Trang tiếp theo"</strong> để mở bìa sách nhé ➔
+                </div>
               </div>
-
-              <p class="memory-text">
-                Có những cuộc gặp gỡ ban đầu tưởng như rất bình thường, nhưng
-                sau này lại trở thành một trong những điều đáng nhớ nhất. Đây là
-                nơi anh muốn lưu lại câu chuyện đầu tiên của chúng mình.
-              </p>
-
-              <p class="memory-note">
-                “Từ khoảnh khắc ấy, câu chuyện của chúng mình bắt đầu…”
-              </p>
             </div>
-          </details>
 
-          <!-- CỘT MỐC 02 -->
-          <details class="timeline-item">
-            <summary class="timeline-summary">
-              <span class="timeline-number">02</span>
+            <!-- TRANG 1 -->
+            <div class="book-page" data-page="1">
+              <div class="page-inner">
+                <div class="page-header-number">01</div>
+                <span class="page-tag">KHỞI ĐẦU CHẶNG ĐƯỜNG</span>
+                <h3>Ngày thiên thần xuất hiện</h3>
+                <p class="page-date">Một ngày thật đặc biệt ♡</p>
 
-              <span class="timeline-heading">
-                <span class="timeline-label">A SWEET MEMORY</span>
-                <span class="timeline-name">Kỷ niệm đáng nhớ</span>
-                <span class="timeline-date">Một ngày mình sẽ nhớ mãi</span>
-              </span>
+                <div class="memory-grid grid-1">
+                  <div class="memory-img-wrap">
+                    <img
+                      src="images/anh-nho-1.jpg"
+                      alt="Thanh Xuân hồi nhỏ 1"
+                    />
+                  </div>
+                </div>
 
-              <span class="timeline-plus" aria-hidden="true">+</span>
-            </summary>
-
-            <div class="timeline-detail">
-              <div class="memory-photo">
-                <span>✧</span>
-                <p>Ảnh và kỷ niệm của hai người</p>
+                <p class="memory-text">
+                  Ngày ấy, chỉ cần một món đồ chơi nhỏ cũng đủ khiến thế giới
+                  trở nên thật tuyệt vời
+                </p>
+                <p class="memory-note">
+                  “Từ khoảnh khắc ấy, câu chuyện của một thiên thần bắt đầu…”
+                </p>
               </div>
-
-              <p class="memory-text">
-                Nơi lưu lại một chuyến đi, một buổi hẹn hò, hay một khoảnh khắc
-                nhỏ khiến cả hai mỉm cười.
-              </p>
             </div>
-          </details>
 
-          <!-- CỘT MỐC 03 -->
-          <details class="timeline-item">
-            <summary class="timeline-summary">
-              <span class="timeline-number">03</span>
+            <!-- TRANG 2 -->
+            <div class="book-page" data-page="2">
+              <div class="page-inner">
+                <div class="page-header-number">02</div>
+                <span class="page-tag">KỈ NIỆM TUỔI THANH XUÂN</span>
+                <h3>Kỷ niệm đáng nhớ</h3>
+                <p class="page-date">Một ngày em sẽ nhớ mãi kỉ niệm c3</p>
 
-              <span class="timeline-heading">
-                <span class="timeline-label">MORE TO COME</span>
-                <span class="timeline-name">
-                  Vẫn còn nhiều điều phía trước
-                </span>
-                <span class="timeline-date"> Chưa viết xong câu chuyện ♡ </span>
-              </span>
+                <div class="memory-grid grid-4">
+                  <div class="memory-img-wrap">
+                    <img src="images/anh-c3-1.jpg" alt="Kỷ niệm C3 - 1" />
+                  </div>
+                  <div class="memory-img-wrap">
+                    <img src="images/anh-c3-2.jpg" alt="Kỷ niệm C3 - 2" />
+                  </div>
+                  <div class="memory-img-wrap">
+                    <img src="images/anh-c3-3.jpg" alt="Kỷ niệm C3 - 3" />
+                  </div>
+                  <div class="memory-img-wrap">
+                    <img src="images/anh-c3-4.jpg" alt="Kỷ niệm C3 - 4" />
+                  </div>
+                </div>
 
-              <span class="timeline-plus" aria-hidden="true">+</span>
-            </summary>
-
-            <div class="timeline-detail">
-              <p class="memory-text">
-                Còn rất nhiều nơi để đi, món ngon để thử, ảnh để chụp và những
-                ngày bình thường để biến thành kỷ niệm. Phần tiếp theo của câu
-                chuyện vẫn đang chờ chúng mình viết tiếp.
-              </p>
+                <p class="memory-text">
+                  Có những lần vấp ngã, những lần thay đổi và những bài học đầu
+                  tiên về trưởng thành khiến Xuân mỉm cười mỗi khi nghĩ lại.
+                </p>
+              </div>
             </div>
-          </details>
+
+            <!-- TRANG 3 -->
+            <div class="book-page" data-page="3">
+              <div class="page-inner">
+                <div class="page-header-number">03</div>
+                <span class="page-tag">CHẶNG ĐƯỜNG MỚI</span>
+                <h3>Ngày em bước vào giảng đường đại học</h3>
+                <p class="page-date">Chưa viết xong câu chuyện ♡</p>
+
+                <div class="memory-grid grid-3">
+                  <div class="memory-img-wrap">
+                    <img src="images/anh-daihoc-1.jpg" alt="Đại học 1" />
+                  </div>
+                  <div class="memory-img-wrap">
+                    <img src="images/anh-daihoc-2.jpg" alt="Đại học 2" />
+                  </div>
+                  <div class="memory-img-wrap">
+                    <img src="images/anh-daihoc-3.jpg" alt="Đại học 3" />
+                  </div>
+                </div>
+
+                <p class="memory-text">
+                  Bắt đầu hành trình đại học với nhiều điều mới mẻ và thử thách.
+                  Mong em luôn giữ vững mục tiêu, không ngừng học hỏi và có thật
+                  nhiều trải nghiệm đáng nhớ trong những năm tháng sắp tới!
+                </p>
+              </div>
+            </div>
+
+            <!-- TRANG 4 -->
+            <div class="book-page" data-page="4">
+              <div class="page-inner">
+                <div class="page-header-number">04</div>
+                <span class="page-tag">CÙNG NHAU</span>
+                <h3>Ngày anh có cơ hội được bên em</h3>
+                <p class="page-date">Cùng nhau viết tiếp câu chuyện ♡</p>
+
+                <div class="memory-grid grid-1">
+                  <div class="memory-img-wrap">
+                    <img src="images/anh-doi-1.jpg" alt="Hai đứa 1" />
+                  </div>
+                </div>
+
+                <p class="memory-text">
+                  Còn rất nhiều nơi để đi, món ngon để thử, ảnh để chụp và những
+                  ngày bình thường để biến thành kỷ niệm. Phần tiếp theo của câu
+                  chuyện vẫn đang chờ chúng mình viết tiếp. Hãy cùng nhau đi
+                  thật lâu nhé!!!
+                </p>
+              </div>
+            </div>
+
+            <!-- TRANG CUỐI -->
+            <div class="book-page page-final" data-page="5">
+              <div class="page-inner final-inner">
+                <span class="final-heart">♡</span>
+                <h3>Món quà thứ nhất</h3>
+                <p class="final-lead">
+                  Vậy là món quà thứ nhất cũng đã gần đến hồi kết...
+                </p>
+
+                <div class="final-wishes-box">
+                  <p>
+                    Chúc mừng sinh nhật tuổi mới bé Thanh Xuân của anh! Chúc em
+                    sang tuổi mới luôn giữ được nụ cười rạng rỡ, hoàn thành thật
+                    xuất sắc mọi thử thách phía trước, luôn vững vàng trên con
+                    đường mình đã chọn và mọi mong ước của em đều sẽ thành hiện
+                    thực.
+                  </p>
+                </div>
+
+                <p class="final-sign">
+                  Luôn đồng hành cùng em,<br /><strong>Hùnggg ♡</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- THANH ĐIỀU HƯỚNG: CHỈ GIỮ MỘT BỘ -->
+        <div class="book-controls">
+          <button class="book-btn" id="prevPageBtn" type="button" disabled>
+            <span>←</span> Trang trước
+          </button>
+
+          <span class="book-pagination" id="bookPagination">
+            Bìa sách / 6
+          </span>
+
+          <button class="book-btn" id="nextPageBtn" type="button">
+            Trang tiếp theo <span aria-hidden="true">→</span>
+          </button>
         </div>
 
         <button class="milestone-back" id="backToLetter" type="button">
